@@ -2,13 +2,6 @@
 
 How to build a React website with Claude Code Agent Teams, a local AI model through Ollama, and a small team of specialist agents running on your own computer.
 
-This tutorial is written for non-technical users. Every command is meant to be copy-pasteable. Every important setting includes plain-English explanations:
-
-- What it does
-- Why it is needed
-
-This tutorial is based on `NativeClaudeTeam_transcript_v3.md` and uses `ClaudeAgentSetupTutorial_EN.md` as the structure, formatting, and readability reference.
-
 ---
 
 ## What You Will Build
@@ -26,8 +19,6 @@ By the end of this tutorial, you will have:
 - Optional Nano Banana image generation through Gemini
 - A safe beginner workflow where Claude Code asks before important actions
 - A local website preview in your browser
-
-This tutorial builds the beginner workflow from the video. It does not use Docker. It does not skip permissions. The Docker automation workflow is covered in `DockerAutomation_tutorial_EN.md`.
 
 ---
 
@@ -50,40 +41,60 @@ Plain English version: the coding model can stay local, but optional internet to
 
 ## Table of Contents
 
-1. [Basic Setup: Local Agent Team](#1-basic-setup-local-agent-team)
-   - [1.1 What This Workflow Means](#11-what-this-workflow-means)
-   - [1.2 Key Concepts](#12-key-concepts)
-   - [1.3 Hardware Requirements](#13-hardware-requirements)
-   - [1.4 Install Required Software](#14-install-required-software)
-   - [1.5 Create the React Project](#15-create-the-react-project)
-   - [1.6 Install a Local AI Model](#16-install-a-local-ai-model)
-   - [1.7 Create a Larger Context Model](#17-create-a-larger-context-model)
-   - [1.8 Configure Claude Code for Ollama](#18-configure-claude-code-for-ollama)
-   - [1.9 Enable Agent Teams and Project Settings](#19-enable-agent-teams-and-project-settings)
-   - [1.10 Install Agent Skills](#110-install-agent-skills)
-   - [1.11 Add the Nano Banana Image Tool](#111-add-the-nano-banana-image-tool)
-   - [1.12 Create the Agent Team](#112-create-the-agent-team)
-   - [1.13 Run the Agent Team](#113-run-the-agent-team)
-   - [1.14 Preview and Clean Up](#114-preview-and-clean-up)
-   - [1.15 Reuse the Pattern](#115-reuse-the-pattern)
-2. [Troubleshooting](#2-troubleshooting)
-3. [Quick Reference](#3-quick-reference)
-4. [Appendix: Plain-English Terms](#4-appendix-plain-english-terms)
-5. [Sources Checked](#5-sources-checked)
+- [Native Claude Team Tutorial](#native-claude-team-tutorial)
+  - [What You Will Build](#what-you-will-build)
+  - [Important Privacy and Safety Note](#important-privacy-and-safety-note)
+  - [Table of Contents](#table-of-contents)
+- [1. Basic Setup: Local Agent Team](#1-basic-setup-local-agent-team)
+  - [1.1 What This Workflow Means](#11-what-this-workflow-means)
+  - [1.2 Key Concepts](#12-key-concepts)
+  - [1.3 Hardware Requirements](#13-hardware-requirements)
+  - [1.4 Install Required Software](#14-install-required-software)
+    - [1.4.1 Install Homebrew on Mac](#141-install-homebrew-on-mac)
+    - [1.4.2 Install Node.js and npm](#142-install-nodejs-and-npm)
+    - [1.4.3 Install Git](#143-install-git)
+    - [1.4.4 Install Ollama](#144-install-ollama)
+    - [1.4.5 Install Claude Code](#145-install-claude-code)
+    - [1.4.6 Install uv](#146-install-uv)
+  - [1.5 Create the React Project](#15-create-the-react-project)
+  - [1.6 Install a Local AI Model](#16-install-a-local-ai-model)
+  - [1.7 Create a Larger Context Model](#17-create-a-larger-context-model)
+  - [1.8 Configure Claude Code for Ollama](#18-configure-claude-code-for-ollama)
+  - [1.9 Enable Agent Teams and Project Settings](#19-enable-agent-teams-and-project-settings)
+  - [1.10 Install Agent Skills](#110-install-agent-skills)
+  - [1.11 Add the Nano Banana Image Tool](#111-add-the-nano-banana-image-tool)
+  - [1.12 Create the Agent Team](#112-create-the-agent-team)
+    - [1.12.1 UI/UX Designer Agent](#1121-uiux-designer-agent)
+    - [1.12.2 React Architect Agent](#1122-react-architect-agent)
+    - [1.12.3 Content Generator Agent](#1123-content-generator-agent)
+  - [1.13 Run the Agent Team](#113-run-the-agent-team)
+    - [1.13.1 Test with One Agent First](#1131-test-with-one-agent-first)
+    - [1.13.2 Launch the Full Team](#1132-launch-the-full-team)
+  - [1.14 Preview and Clean Up](#114-preview-and-clean-up)
+  - [1.15 Reuse the Pattern](#115-reuse-the-pattern)
+- [2. Troubleshooting](#2-troubleshooting)
+  - [Claude Code cannot connect to Ollama](#claude-code-cannot-connect-to-ollama)
+  - [Model not found](#model-not-found)
+  - [Agent Teams do not appear](#agent-teams-do-not-appear)
+  - [Teammates use the wrong model](#teammates-use-the-wrong-model)
+  - [Nano Banana does not appear](#nano-banana-does-not-appear)
+  - [The local model is too slow](#the-local-model-is-too-slow)
+  - [Build fails](#build-fails)
+- [3. Quick Reference](#3-quick-reference)
+  - [Basic local launch](#basic-local-launch)
+  - [Basic local environment](#basic-local-environment)
+  - [Ollama commands](#ollama-commands)
+  - [React commands](#react-commands)
+  - [Nano Banana commands](#nano-banana-commands)
+  - [Agent folders](#agent-folders)
+- [4. Appendix: Plain-English Terms](#4-appendix-plain-english-terms)
+- [5. Sources Checked](#5-sources-checked)
 
 ---
 
 # 1. Basic Setup: Local Agent Team
 
 This section creates the safe beginner setup from the video.
-
-It does not use Docker.
-
-It does not use tmux.
-
-It does not skip permissions.
-
-It uses one normal terminal window. Claude Code will ask before important file changes or commands.
 
 ## 1.1 What This Workflow Means
 
